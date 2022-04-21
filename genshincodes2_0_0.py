@@ -12,7 +12,7 @@ from datetime import datetime
 def main():
     codeget = requests.get('https://www.pockettactics.com/genshin-impact/codes')
     soupelement = BeautifulSoup(codeget.text, 'html.parser')
-    etreeelement = etree.HTML(soupelement.text)
+    etreeelement = etree.HTML(str(soupelement))
 
     xpaths = xpath_handler(5)
     codelist = make_code_list(xpaths, etreeelement)
@@ -57,7 +57,7 @@ def make_code_list(pathlist, etree):
 def xpath_handler(val):
     xpaths = []
     for path in range(val):
-        xpaths.append(f'//*[@id="site_wrap"]/article/div/ul[1]/li[{path+1}]/strong')
+        xpaths.append(f'//*[@id="site_wrap"]/article/div/ul[1]/li[{path+1}]/strong')    
     return xpaths
 
 def inputCodes(codelist):
